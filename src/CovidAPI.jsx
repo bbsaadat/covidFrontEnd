@@ -4,7 +4,8 @@ import Table from "./components/Table.jsx"
 import Pagination from "./components/Pagination.jsx"
 import SearchFilter from "./components/SearchFilter.jsx"
 import RowFilter from "./components/RowFilter.jsx"
-import ChartData from "./components/ChartData.jsx";
+import ChartData from "./components/ChartData.jsx"
+import LiveMeter from "./components/LiveMeter.jsx";
 
 const fetchCovid = async (props) => {
 
@@ -48,9 +49,11 @@ const CovidAPI = () => {
             {status === 'success' && (
                 <div>
                 <ChartData covidData={data}/>
+                <hr class="style-eight"></hr>
                     <section class="section">
                         <nav class="level">
                             <RowFilter settingPostsPerPage={numberOfRows} postsPerPage={postsPerPage}/>
+                            <LiveMeter />
                             <SearchFilter setSearchCountry={setSearchCountry}/>
                         </nav>
                     </section>
@@ -64,10 +67,14 @@ const CovidAPI = () => {
                 </div>
             )}
             {status === 'loading' && (
+                <div>
+                <div>Loading...</div>
                 <div><progress class="progress is-large is-primary" max="100">60%</progress></div>
+                </div>
+
             )}
             {status === 'error' && (
-                <div>Error fetching data</div>
+                <div>Error fetching covid data</div>
             )}
         </div>
     );

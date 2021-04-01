@@ -7,15 +7,12 @@ const AddChartButton = (props) => {
 
         for(const acountry of props.covidData){ //this for loop is to help find the object pertaining to the country in order to get its countrie's population
             if(acountry.country === pickedCountry){
-                props.addCountry(acountry);
+                props.addCountry(acountry, index);
             }
         }
     }
 
     const Custom = (pickedCustom, index) => {
-        // console.log("apple");
-        // console.log(pickedCustom);
-        // console.log("sauce");
         props.addCustom(pickedCustom, index);
     }
     
@@ -25,18 +22,19 @@ const AddChartButton = (props) => {
             <div class="column">
                  <div class="dropdown is-hoverable">
                     <div class="dropdown-trigger">
-                        <button class="button" aria-haspopup="true" aria-controls="dropdown-menu4">
-                            <span>Hover me</span>
+                        <button class="button is-large" aria-haspopup="true" aria-controls="dropdown-menu4">
+                            <span>{props.countries[props.index] === undefined ? "Pick Country" : props.countries[props.index].country}</span>
                             <span class="icon is-small">
                                 <i class="fas fa-angle-down" aria-hidden="true"></i>
                             </span>
                         </button>
                     </div>
+                    <h1></h1>
                     <div class="dropdown-menu" id="dropdown-menu4" role="menu">
                         <div class="dropdown-content">
                             <div class="dropdown-item">
                                 {props.covidData.map(obj => (
-                                    <a onClick={() => Population(obj.country)} class="dropdown-item">{obj.country}</a>
+                                    <a onClick={() => Population(obj.country, props.index)} class="dropdown-item">{obj.country}</a>
                                 ))}
                             </div>
                         </div>
@@ -45,8 +43,8 @@ const AddChartButton = (props) => {
 
                  <div class="dropdown is-hoverable">
                     <div class="dropdown-trigger">
-                        <button class="button" aria-haspopup="true" aria-controls="dropdown-menu4">
-                            <span>Hover me</span>
+                        <button class="button is-large" aria-haspopup="true" aria-controls="dropdown-menu4">
+                            <span>{props.custom[props.index] === undefined ? "Pick Classification" : props.custom[props.index]}</span>
                             <span class="icon is-small">
                                 <i class="fas fa-angle-down" aria-hidden="true"></i>
                             </span>
@@ -80,58 +78,3 @@ const AddChartButton = (props) => {
 }
 
 export default AddChartButton;
-
-{/* <option onClick={() => Population("yoyo")}>{obj.country}</option> */}
-
-{/* <div class="select is-normal">
-<select>
-    {props.covidData.map(obj => (
-        <option onClick={() => console.log("baubak")}>{obj.country}</option>
-    ))}
-</select>
-</div> */}
-
-
-
-{/* <div class="dropdown is-hoverable">
-<div class="dropdown-trigger">
-    <button class="button" aria-haspopup="true" aria-controls="dropdown-menu4">
-        <span>Hover me</span>
-        <span class="icon is-small">
-            <i class="fas fa-angle-down" aria-hidden="true"></i>
-        </span>
-    </button>
-</div>
-<div class="dropdown-menu" id="dropdown-menu4" role="menu">
-    <div class="dropdown-content">
-        <div class="dropdown-item">
-            {props.covidData.map(obj => (
-                <a onClick={() => Population(obj.country)} class="dropdown-item">{obj.country}</a>
-            ))}
-        </div>
-    </div>
-</div>
-</div>  */}
-
-
-
-
-{/* <div class="dropdown is-hoverable">
-<div class="dropdown-trigger">
-    <button class="button" aria-haspopup="true" aria-controls="dropdown-menu4">
-        <span>Hover me</span>
-        <span class="icon is-small">
-            <i class="fas fa-angle-down" aria-hidden="true"></i>
-        </span>
-    </button>
-</div>
-<div class="dropdown-menu" id="dropdown-menu4" role="menu">
-    <div class="dropdown-content">
-        <div class="dropdown-item">
-            {props.covidData.map(obj => (
-                <a onClick={() => Population(obj.country)} class="dropdown-item">{obj.country}</a>
-            ))}
-        </div>
-    </div>
-</div>
-</div>  */}

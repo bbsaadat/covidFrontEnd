@@ -13,7 +13,7 @@ const Pagination = (props) => {
     }
 
     return (
-        <div>
+        <div class="container">
             <nav class="pagination is-rounded" role="navigation" aria-label="pagination">
                 <ul class="pagination-list">
                     {pageNumbers.map(number => (

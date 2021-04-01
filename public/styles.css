@@ -15,16 +15,13 @@ h1{
     font-family: "McLaren", cursive;
 }
 
-footer {
-    position: absolute;
-    text-align: center;
-    bottom: 0;
-    width: 100%;
-    height: 2.5rem;
+p{
+
+    font-size: 20px;
 }
 
-footer p{
-    color: #ccc;
+i{
+    font-size: 20px;
 }
 
 .table.sticky th{
@@ -46,4 +43,48 @@ footer p{
     border-style: groove;
     border-width: 2px;
   }
-  
+
+  hr.style-eight {
+    overflow: visible; /* For IE */
+    padding: 0;
+    border: none;
+    border-top: medium double #333;
+    color: #333;
+    text-align: center;
+}
+hr.style-eight:after {
+    content: "Data table";
+    display: inline-block;
+    position: relative;
+    top: -0.7em;
+    font-size: 1.5em;
+    padding: 0 0.25em;
+    background: white;
+}
+
+.circle{
+    animation: pulse 2s infinite;
+    background-color: rgba(255,82, 82, 1);
+    border-radius: 50%;
+    height: 20px;
+    width: 20px;
+    margin-left: 500px;
+
+}
+
+@keyframes pulse{
+    0% {
+        transform: scale(0.9);
+        box-shadow: 0 0 0 0 rgba(255,82, 82, 0.7);
+    }
+
+    70% {
+        transform: scale(1);
+        box-shadow: 0 0 0 5px rgba(255,82, 82, 0);
+    }
+
+    100% {
+        transform: scale(0.9);
+
+    }
+}

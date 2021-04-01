@@ -21,7 +21,7 @@ const Chart = (props) => {
 
     }
 
-
+    // console.log(props.countries.map(obj => (obj.population)));
 
 
 
@@ -29,12 +29,12 @@ const Chart = (props) => {
         labels: props.countries.map(obj => obj.country),
         datasets:[
             {
-                label: 'Population',
+                label: 'Population of country',
                 data: props.countries.map(obj => parseInt(obj.population.replace(/,/g, ""))),
                 backgroundColor: 'rgba(153, 102, 255, 0.6)',
 
             },{
-                label: 'Custom classification',
+                label: 'Selected classification',
                 data: allCustom.map(obj => obj),
                 backgroundColor:'rgba(75, 192, 192, 0.6)',
 
@@ -50,22 +50,41 @@ const Chart = (props) => {
                 data={chartData}
                 width={50}
                 height={600}
-                options={{ maintainAspectRatio: false, 
+                options={{ maintainAspectRatio: false, tooltips: {
+                                                    
+                                                        callbacks: {
+                                                            label: function(t, d) {
+                                                                var xLabel = d.datasets[t.datasetIndex].label;
+                                                                var yLabel = t.yLabel;
+                                                                // first bar
+                                                                if (t.datasetIndex === 0) return "Population" + ': ' + yLabel.toString().split(/(?=(?:...)*$)/).join(',') + ' people';
+                                                                // second bar
+                                                                else if (t.datasetIndex === 1)  return xLabel + ': ' + yLabel.toString().split(/(?=(?:...)*$)/).join(',');
+                                                            }
+                                                        }
+                                                        }, //end tooltips
 
-                            scales: {
-                                yAxes: [{
-                                    ticks:{
-                                        beginAtZero: true,
-                                        userCallback: function(value, index, values) {
-                                                value = value.toString();
-                                                value = value.split(/(?=(?:...)*$)/);
-                                                value = value.join(',');
-                                                return value;
-                                            }
-                                        }
-                                    }]
-                            } 
-                        }}
+                                                        scales: {
+                                                            yAxes: [{
+                                                                ticks:{
+                                                                    beginAtZero: true,
+                                                                    userCallback: function(value, index, values) {
+                                                                            value = value.toString();
+                                                                            value = value.split(/(?=(?:...)*$)/);
+                                                                            value = value.join(',');
+                                                                            return value;
+                                                                            }
+                                                                        }
+                                                                    }]
+                                                                },
+                                                                
+                                                        legend: {
+                                                            display: true,
+                                                            labels: {
+                                                                fontSize: 20
+                                                            }
+                                                        }
+                                                    }}
              />
             </h2>
         </section>
@@ -75,3 +94,6 @@ const Chart = (props) => {
 }
 
 export default Chart;
+
+
+

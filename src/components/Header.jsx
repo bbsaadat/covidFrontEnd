@@ -10,7 +10,7 @@ function Header(){
         Coronavirus 
       </h1>
       <h1 class="subtitle">
-      (COVID-19) Dashboard
+      (COVID-19) World data
       </h1>
     </div>
   </section>

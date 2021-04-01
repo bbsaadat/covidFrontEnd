@@ -2,11 +2,15 @@ import React from "react";
 
 
 function Footer(){
-    return <footer>
-        <p>
-        Copyright © {new Date().getFullYear()}
-        </p>
-    </footer>
+    return (
+        <footer class="footer">
+          <div class="content has-text-centered">
+            <p>
+                Copyright © {new Date().getFullYear()}
+            </p>
+          </div>
+        </footer>
+    )
 }
 
 export default Footer;
@@ -18,3 +22,9 @@ export default Footer;
     </p>
   </div>
 </footer> */}
+
+{/* <footer>
+        <p>
+        Copyright © {new Date().getFullYear()}
+        </p>
+    </footer> */}

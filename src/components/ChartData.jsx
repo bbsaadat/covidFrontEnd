@@ -7,7 +7,6 @@ const ChartData = (props) => {
 
     const [dropDown, setDropDown] = useState(1);
 
-
     const [countries, setCountries] = useState([]);
     const [custom, setCustom] = useState([]);
 
@@ -20,57 +19,82 @@ const ChartData = (props) => {
 
         setDropDown(dropDown-1);
 
-        var countriesTemp = [...countries];
-        countriesTemp.pop();
-        var customTemp = [...custom];
-        customTemp.pop();
+        if( dropDown === countries.length && dropDown === custom.length){
+            var countriesTemp = [...countries];
+            countriesTemp.pop();
+            var customTemp = [...custom];
+            customTemp.pop();
+    
+            setCountries([...countriesTemp]);
+            setCustom([...customTemp]);
+        }else if(dropDown === countries.length){
+            var countriesTemp = [...countries];
+            countriesTemp.pop();
+            setCountries([...countriesTemp]);
+        }else if( dropDown === custom.length){
+            var customTemp = [...custom];
+            customTemp.pop();
+            setCustom([...customTemp]);
+        }
 
-        setCountries([...countriesTemp]);
-        setCustom([...customTemp]);
         
 
     }
-    const addCountry = (newCountry) =>{
-        setCountries([...countries, newCountry]);
+    const addCountry = (newCountry, index) =>{  //splice according to index
+        if(index !== countries.length){
+            // console.log(index);
+            const tempCountries = [...countries];
+            tempCountries.splice(index, 1); //taking out old item by index
+            tempCountries.splice(index, 0, newCountry); //putting in new item where old item was deleted
+            // console.log(tempCountries);
+            setCountries([...tempCountries]);
+        }
+        else{
+            setCountries([...countries, newCountry]);
+        }
+        
+        // setCountries([...countries, newCountry]);
     }
     const addCustom = (newCustom, index) =>{
-        setCustom([...custom, newCustom]);
+        if(index !== custom.length){
+            console.log(index);
+            const tempCustoms = [...custom];
+            tempCustoms.splice(index, 1); //taking out old item by index
+            tempCustoms.splice(index, 0, newCustom); //putting in new item where old item was deleted
+            console.log(tempCustoms);
+            setCustom([...tempCustoms]);
+        }else{
+            setCustom([...custom, newCustom]);
+        }
+
     }
-    //when we remove a country the population and custom attribute also gets removed
-    const removeCountry = (aCountry) =>{
-        const index = countries.indexOf(aCountry);
-    }
-    const deleteSpecificGraph = (index) => {
-        setCountries(countries.splice(index,1));
-    }
+ 
+
+
 
     const items = [];
     for(let i=0; i<dropDown; i++){
-        items.push( <AddChartButton  covidData={props.covidData} addCountry={addCountry} addCustom={addCustom} index={i}/>);
-        // items.push( <AddChartButton  covidData={props.covidData} addCountry={addCountry} addCustom={addCustom} index={i}/>);
+        items.push( <AddChartButton  covidData={props.covidData} addCountry={addCountry} addCustom={addCustom} index={i} countries={countries}  custom={custom}/>);
     }
 
 
     return (
         <div>
-            <Chart countries={countries}  custom={custom}/>
+            <Chart countries={countries}  custom={custom} />
             <div class="columns is-gapless">
                 {items}
             </div>
             {(() => {
-                if(dropDown < 5 && countries.length !== 0 && custom.length !== 0 && countries.length === dropDown && custom.length === dropDown){
-                    return (<button onClick={() => incrementDropDown()} class="button is-primary is-rounded is-focus is-outlined is-medium"><i class="fa fa-plus-square" aria-hidden="false"></i></button>);
+                if( countries.length !== 0 && custom.length !== 0 && countries.length === dropDown && custom.length === dropDown){
+                    return (<button onClick={() => incrementDropDown()} class="button is-primary is-rounded is-focus is-outlined is-large">New chart&nbsp;<i class="fa fa-plus-square" aria-hidden="false"></i></button>);
                 }
 
             })()}
 
-            {dropDown > 1 && (<button onClick={() => decrementDropDown()} class="button is-danger is-rounded is-focus is-outlined is-medium"><i class="fa fa-times-circle" aria-hidden="false"></i></button>)}
+            {dropDown > 1 && (<button onClick={() => decrementDropDown()} class="button is-danger is-rounded is-focus is-outlined is-large">Delete chart&nbsp;<i class="fa fa-times-circle" aria-hidden="false"></i></button>)}
         </div>
     );
 
 }
 
 export default ChartData;
-
-// (dropDown < 5 && countries !== [] && custom !== [] && countries.length === dropDown && custom.length === dropDown)
-// {dropDown < 5 && (<button onClick={() => incrementDropDown()} class="button is-primary is-rounded is-focus is-outlined is-medium"><i class="fa fa-plus-square" aria-hidden="false"></i></button>)}
