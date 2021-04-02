@@ -9,7 +9,7 @@ import LiveMeter from "./components/LiveMeter.jsx";
 
 const fetchCovid = async (props) => {
 
-    const response = await fetch("/covid");
+    const response = await fetch("https://floating-shelf-46046.herokuapp.com/covid");
     const obj_covid = await response.json();
     return obj_covid;
 }

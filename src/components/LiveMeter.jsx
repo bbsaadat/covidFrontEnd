@@ -4,7 +4,7 @@ import { useQuery } from 'react-query';
 
 const fetchTime = async (props) => {
 
-    const response = await fetch("/covid?time=1");
+    const response = await fetch("https://floating-shelf-46046.herokuapp.com/covid?time=1");
     const obj_covid = await response.json();
     return obj_covid;
 }
